@@ -1,0 +1,17 @@
+.tb-list { border:1px solid gray; width:100%; text-align: center; }
+.tb-list th { color:#168; background:#f0f6f9; }
+.tb-list tr, .tb-list td { border-top:1px solid gray; padding:10px; }
+
+.btn-alr { margin-top:20px; text-align: right; }
+
+.art-join { display: flex; flex-direction:column; box-sizing:border-box; align-items: center; justify-content: center; }
+.art-join::before { content: ''; display: block; flex-grow: 1; height: 24px; }
+
+.frm-join { border-radius: 8px; border: 1px solid #dadce0; margin: 0 auto; padding: 10px 20px; }
+.frm-join div { margin-bottom: 10px; }
+.frm-join .in-txt { display: flex; flex-direction:row; }
+.frm-join .in-txt label { flex-basis: 30%; margin-right: 10px; text-align: center; }
+
+.frm-join .ra-chk input[type="radio"] { display:none; }
+.frm-join .ra-chk label { display:inline-block; background-color: #ddd; padding: 4px 11px; cursor:pointer; }
+.frm-join .ra-chk input[type="radio"]:checked+label { background-color: #168; }

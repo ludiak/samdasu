@@ -20,29 +20,33 @@
 </head>
 <body>	
 	<section layout:fragment="content">
-		<article>
+		<article class="art-join">
 			<form id="frm" name="frm" method="post" th:object="${member}">
-			<h1>Join</h1>
-			<div class="mt10">
-				<span>ID</span>
-				<input type="text" id="userId" th:field="*{userId}">
-			</div>
-			<div class="mt10">
-				<span>PASS</span>
-				<input type="password" name="password" id="password" th:field="*{password}">
-			</div>
-			<div class="mt10">
-				<span>NAME</span>
-				<input type="text" name="name" id="name" th:field="*{name}">
-			</div>
-			<div>
-				<span>ROLES</span>
-				<input type="radio" name="roles" id="roles1" value="ADMIN" th:field="*{roles}"> admin
-				<input type="radio" name="roles" id="roles2" value="USER" checked th:field="*{roles}"> user
-			</div>
-			<div>
-				<button id="action">submit</button>
-				<button id="list">list</button>
+			<div class="frm-join">
+				<h1>Join</h1>
+				<div class="in-txt">
+					<label for="userId">ID</label>
+					<input type="text" id="userId" th:field="*{userId}">
+				</div>
+				<div class="in-txt">
+					<label for="password">PASS</label>
+					<input type="password" name="password" id="password" th:field="*{password}">
+				</div>
+				<div class="in-txt">
+					<label for="name">NAME</label>
+					<input type="text" name="name" id="name" th:field="*{name}">
+				</div>
+				<div class="ra-chk">
+					<input type="radio" name="roles" id="roles1" value="ADMIN" th:field="*{roles}">
+					<label for="roles1">Admin</label>
+					
+					<input type="radio" name="roles" id="roles2" value="USER" checked th:field="*{roles}">
+					<label for="roles2">User</label>
+				</div>
+				<div class="btn-alr">
+					<button id="action">submit</button>
+					<button id="list">list</button>
+				</div>
 			</div>
 			</form>
 		</article>

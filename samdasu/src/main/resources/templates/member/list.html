@@ -21,7 +21,7 @@
 <body>	
 	<section layout:fragment="content">
 		<article>
-			<table>
+			<table class="tb-list">
 				<tbody>
 					<th>번호</th>
 					<th>아이디</th>
@@ -41,7 +41,7 @@
 				</tbody>
 			</table>
 			
-			<div th:if="${#lists.isEmpty(list)}">
+			<div class="btn-alr" th:if="${#lists.isEmpty(list)}">
 				<button id="memJoin">회원등록</button>
 			</div>
 		</article>
