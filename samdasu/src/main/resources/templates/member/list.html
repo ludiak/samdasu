@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+<title>Join</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#action").click(function(){
+			$("#frm").attr("action", "/member/save");
+			$("#frm").submit();
+		});
+		
+		$("#memJoin").click(function(){
+			location.href="/member/find";
+		});
+	});
+</script>
+</head>
+<body>	
+	<section layout:fragment="content">
+		<article>
+			<table>
+				<tbody>
+					<th>번호</th>
+					<th>아이디</th>
+					<th>이름</th>
+					<th>권한</th>
+					<th>생성일</th>
+				</tbody>
+				<tbody th:if="${not #lists.isEmpty(list)}" th:each="mem : ${list}">
+					<td><th:block th:text="${mem.seq}" /></td>
+					<td><a th:href="@{'/member/find/'+${mem.seq}}"><th:block th:text="${mem.userId}" /></a></td>
+					<td><th:block th:text="${mem.name}" /></td>
+					<td><th:block th:text="${mem.roles}" /></td>
+					<td><th:block th:text="${mem.createDt}" /></td>
+				</tbody>
+				<tbody th:if="${#lists.isEmpty(list)}">
+					<td colspan="5">조회 된 데이터가 없습니다.</td>
+				</tbody>
+			</table>
+			
+			<div th:if="${#lists.isEmpty(list)}">
+				<button id="memJoin">회원등록</button>
+			</div>
+		</article>
+	</section>
+</body>	
+</html>

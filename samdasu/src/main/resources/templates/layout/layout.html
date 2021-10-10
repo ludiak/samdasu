@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+	<title layout:title-pattern="$LAYOUT_TITLE:$CONTENT_TITLE">회색</title>
+	<th:block th:replace="fragment/header :: header"></th:block>
+</head>
+<body>
+	<header>
+		<h2><a href="/">Gray</a></h2>
+	</header>
+	<nav>
+		<ul>
+			<li><a href="#">G</a></li>
+			<li><a href="#">R</a></li>
+			<li><a href="#">A</a></li>
+			<li><a href="/member">member</a></li>
+			<li><a href="/h2-console">console</a></li>
+		</ul>
+	</nav>
+
+	<section layout:fragment="content"></section>
+
+	<footer th:replace="fragment/footer :: footer"></footer>
+</body>
+</html>
