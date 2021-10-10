@@ -7,8 +7,59 @@
 <title>Join</title>
 <script type="text/javascript">
 	$(document).ready(function(){
+		$("#frm").validate({
+			rules:{
+				userId:{
+					required:true,
+					rangelength:[2,5]
+				},
+				password:{
+					required:true
+				},
+				name:{
+					required:true
+				},
+				roles:{
+					required:true
+				}
+			},
+			messages:{
+				userId:{
+					required:"필수 값 입니다.",
+					rangelength:"최소 {0}, 최대 {1} 값 입니다."
+				},
+				password:{
+					required:"필수 값 입니다."
+				},
+				name:{
+					required:"필수 값 입니다."
+				},
+				roles:{
+					required:"필수 값 입니다."
+				}
+			},
+			ignore:[],
+			submitHandler: function() {
+				if(confirm("회원가입이 됩니다.")){
+					return true;
+				}
+			},
+			errorPlacement: function(error, element) {
+				if(element.is(":radio") || element.is(":checkbox")){
+					element.closest(".ra-chk").after(error);
+				}else{
+					element.after(error);
+				}
+			}
+		});
+		
 		$("#action").click(function(){
 			$("#frm").attr("action", "/member/save");
+			$("#frm").submit();
+		});
+		
+		$("#update").click(function(){
+			$("#frm").attr("action", "/member/update");
 			$("#frm").submit();
 		});
 		
@@ -21,53 +72,40 @@
 <body>	
 	<section layout:fragment="content">
 		<article class="art-join">
-			<form id="frm" name="frm" method="post" th:object="${member}">
 			<div class="frm-join">
 				<h1>Join</h1>
+				<form id="frm" name="frm" method="post" th:object="${member}">
 				<div class="in-txt">
 					<label for="userId">ID</label>
-					<input type="text" id="userId" th:field="*{userId}">
+					<div class="in-msg">
+						<input type="text" id="userId" th:field="*{userId}">
+					</div>
 				</div>
 				<div class="in-txt">
 					<label for="password">PASS</label>
-					<input type="password" name="password" id="password" th:field="*{password}">
+					<div class="in-msg">
+						<input type="password" id="password" th:field="*{password}">
+					</div>
 				</div>
 				<div class="in-txt">
 					<label for="name">NAME</label>
-					<input type="text" name="name" id="name" th:field="*{name}">
+					<div class="in-msg">
+						<input type="text" id="name" th:field="*{name}">
+					</div>
 				</div>
 				<div class="ra-chk">
-					<input type="radio" name="roles" id="roles1" value="ADMIN" th:field="*{roles}">
+					<input type="radio" id="roles1" value="ADMIN" th:field="*{roles}">
 					<label for="roles1">Admin</label>
 					
-					<input type="radio" name="roles" id="roles2" value="USER" checked th:field="*{roles}">
+					<input type="radio" id="roles2" value="USER" th:field="*{roles}">
 					<label for="roles2">User</label>
 				</div>
+				</form>
 				<div class="btn-alr">
-					<button id="action">submit</button>
+					<button id="action" th:if="${#strings.isEmpty(member.seq)}">submit</button>
+					<button id="update" th:if="${not #strings.isEmpty(member.seq)}">update</button>
 					<button id="list">list</button>
 				</div>
-			</div>
-			</form>
-		</article>
-		<article>
-			<div th:if="${not #lists.isEmpty(list)}">
-				<table>
-					<tbody>
-						<th>번호</th>
-						<th>아이디</th>
-						<th>이름</th>
-						<th>권한</th>
-						<th>생성일</th>
-					</tbody>
-					<tbody th:each="mem : ${list}">
-						<td><th:block th:text="${mem.seq}" /></td>
-						<td><a th:href="@{'/member/find/'+${mem.seq}}"><th:block th:text="${mem.userId}" /></a></td>
-						<td><th:block th:text="${mem.name}" /></td>
-						<td><th:block th:text="${mem.roles}" /></td>
-						<td><th:block th:text="${mem.createDt}" /></td>
-					</tbody>
-				</table>
 			</div>
 		</article>
 	</section>
