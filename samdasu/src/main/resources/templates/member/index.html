@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layout/layout}">
+
+<head>
+<title>Join</title>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#action").click(function(){
+			$("#frm").attr("action", "/member/save");
+			$("#frm").submit();
+		});
+	});
+</script>
+</head>
+<body>	
+	<section layout:fragment="content">
+		<article>
+			<form id="frm" name="frm" method="post" th:object="${member}">
+			<h1>Join</h1>
+			<div class="mt10">
+				<span>ID</span>
+				<input type="text" id="userId" th:field="*{userId}">
+			</div>
+			<div class="mt10">
+				<span>PASS</span>
+				<input type="password" name="password" id="password" th:field="*{password}">
+			</div>
+			<div class="mt10">
+				<span>NAME</span>
+				<input type="text" name="name" id="name" th:field="*{name}">
+			</div>
+			<div>
+				<span>ROLES</span>
+				<input type="radio" name="roles" id="roles1" value="ADMIN" th:field="*{roles}"> admin
+				<input type="radio" name="roles" id="roles2" value="USER" checked th:field="*{roles}"> user
+			</div>
+			<button id="action">submit</button>
+			</form>
+		</article>
+		<article>
+			<div th:if="${not #lists.isEmpty(list)}">
+				<table>
+					<tbody>
+						<th>번호</th>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>권한</th>
+						<th>생성일</th>
+					</tbody>
+					<tbody th:each="mem : ${list}">
+						<td><th:block th:text="${mem.seq}" /></td>
+						<td><a th:href="@{'/member/find/'+${mem.seq}}"><th:block th:text="${mem.userId}" /></a></td>
+						<td><th:block th:text="${mem.name}" /></td>
+						<td><th:block th:text="${mem.roles}" /></td>
+						<td><th:block th:text="${mem.createDt}" /></td>
+					</tbody>
+				</table>
+			</div>
+		</article>
+	</section>
+</body>	
+</html>
