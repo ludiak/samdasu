@@ -29,7 +29,7 @@ public class MemberController {
 	@RequestMapping(value={"/find", "/find/{seq}"})
 	public String memberFind(HttpServletRequest request, @ModelAttribute("member") Member member, @PathVariable(required=false) Long seq, Model model) {
 		if(!StringUtils.isEmpty(seq)) {
-			member = memberService.findBySeq(seq);
+			member = memberService.getOne(seq);
 		}
 		model.addAttribute("member", member);
 		return "/member/view";
@@ -45,7 +45,11 @@ public class MemberController {
 	
 	@RequestMapping(value="/update")
 	public String memberUpdate(HttpServletRequest request, @ModelAttribute("member") Member member, Model model) {
-		System.out.println("Update");
+		Member memberUpdate = memberService.getOne(member.getSeq());
+		memberUpdate.setUserId(member.getUserId());
+		memberUpdate.setName(member.getName());
+		memberService.save(memberUpdate);
+		
 		return "/member/view";
 	}
 }

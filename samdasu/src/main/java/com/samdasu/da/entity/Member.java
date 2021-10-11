@@ -1,7 +1,6 @@
 package com.samdasu.da.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="MEMBER")
-public class Member implements Serializable {
+public class Member extends BaseTime implements Serializable {
 	private static final long serialVersionUID = -7341155532487259937L;
 
 	@Id
@@ -33,14 +30,17 @@ public class Member implements Serializable {
 	@Column(name="ROLES")
 	private String roles;
 	
-	@Column(name="CREATE_DT", nullable=false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date createDt;
+	public Member() {
+		
+	}
 	
-	@Column(name="MODIFY_DT", nullable=false, insertable = false, updatable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-	@Temporal(TemporalType.TIMESTAMP)
-	private Date modifyDt;
-
+	public Member(String userId, String pass, String name, String roles) {
+		this.userId = userId;
+		this.password = pass;
+		this.name = name;
+		this.roles = roles;		
+	}
+	
 	public Long getSeq() {
 		return seq;
 	}
@@ -79,21 +79,5 @@ public class Member implements Serializable {
 
 	public void setRoles(String roles) {
 		this.roles = roles;
-	}
-
-	public Date getCreateDt() {
-		return createDt;
-	}
-
-	public void setCreateDt(Date createDt) {
-		this.createDt = createDt;
-	}
-
-	public Date getModifyDt() {
-		return modifyDt;
-	}
-
-	public void setModifyDt(Date modifyDt) {
-		this.modifyDt = modifyDt;
 	}
 }

@@ -13,11 +13,10 @@ public interface MemberRepository extends JpaRepository<Member, Long>{
 	public List<Member> findAll();
 	
 	public Member findBySeq(Long seq);
+	public Member getOne(Long seq);
 	
 	public Member save(Member member);
 	
-//	public Member updateBySeq(Member member);
-//	
 //	public Member deleteBySeq(Long seq);
 
 }
