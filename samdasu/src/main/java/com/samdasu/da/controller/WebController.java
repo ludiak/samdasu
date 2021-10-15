@@ -33,7 +33,7 @@ public class WebController {
 	@RequestMapping(value="time")
 	@ResponseBody
 	public String time(HttpServletRequest request, @RequestParam Map<String, Object> param) {
-		return "시간시간";
+		return "timetime";
 	}
 
 }
