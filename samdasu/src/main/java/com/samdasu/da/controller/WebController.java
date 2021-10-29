@@ -18,12 +18,6 @@ public class WebController {
 		return "/index";
 	}
 	
-	@RequestMapping(value="login")
-	public String login(HttpServletRequest request, @RequestParam Map<String, Object> param) {
-		System.out.println("login");
-		return "/login";
-	}
-	
 	@RequestMapping(value="admin")
 	public String admin(HttpServletRequest request, @RequestParam Map<String, Object> param) {
 		System.out.println("admin");
