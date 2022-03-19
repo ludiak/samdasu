@@ -79,7 +79,8 @@
 					<label for="userId">ID</label>
 					<div class="in-msg">
 						<input type="hidden" id="seq" th:field="*{seq}">
-						<input type="text" id="userId" th:field="*{userId}">
+						<input th:if="*{userId == null}" type="text" id="userId">
+						<span th:unless="*{userId == null}" th:text="*{userId}" />					
 					</div>
 				</div>
 				<div class="in-txt">
