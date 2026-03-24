@@ -21,32 +21,27 @@
 <body>	
 	<section layout:fragment="content">
 		<article>
-			<table class="tb-list">
-				<colgroup>
-					<col width="10%">
-					<col width="*">
-					<col width="30%">
-					<col width="20%">
-					<col width="20%">
-				</colgroup>
-				<tbody>
-					<th>번호</th>
-					<th>아이디</th>
-					<th>이름</th>
-					<th>권한</th>
-					<th>생성일</th>
-				</tbody>
-				<tbody th:if="${not #lists.isEmpty(list)}" th:each="mem : ${list}">
-					<td><th:block th:text="${mem.seq}" /></td>
-					<td><a th:href="@{'/member/find/'+${mem.seq}}"><th:block th:text="${mem.userId}" /></a></td>
-					<td><th:block th:text="${mem.name}" /></td>
-					<td><th:block th:text="${mem.roles}" /></td>
-					<td><th:block th:text="${#dates.format(mem.createDt,'yyyy-MM-dd HH:mm')}" /></td>
-				</tbody>
-				<tbody th:if="${#lists.isEmpty(list)}">
-					<td colspan="5">조회 된 데이터가 없습니다.</td>
-				</tbody>
-			</table>
+			<div class="tb-wrap">
+				<table class="tb-list">
+					<thead>
+						<th>번호</th>
+						<th>아이디</th>
+						<th>이름</th>
+						<th>권한</th>
+						<th>생성일</th>
+					</thead>
+					<tbody th:if="${not #lists.isEmpty(list)}" th:each="mem : ${list}">
+						<td><th:block th:text="${mem.seq}" /></td>
+						<td><a th:href="@{'/member/find/'+${mem.seq}}"><th:block th:text="${mem.userId}" /></a></td>
+						<td><th:block th:text="${mem.name}" /></td>
+						<td><th:block th:text="${mem.roles}" /></td>
+						<td><th:block th:text="${#dates.format(mem.createDt,'yyyy-MM-dd HH:mm')}" /></td>
+					</tbody>
+					<tbody th:if="${#lists.isEmpty(list)}">
+						<td colspan="5">조회 된 데이터가 없습니다.</td>
+					</tbody>
+				</table>
+			</div>
 			
 			<div class="btn-alr">
 				<button id="memJoin">회원등록</button>
